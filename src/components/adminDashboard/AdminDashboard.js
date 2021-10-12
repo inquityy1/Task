@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ItemsService from "../../services/items.service";
+import Modal from "./delete/Modal";
 
 import "./adminDashboard.css";
 
@@ -9,14 +10,20 @@ const AdminDashboard = () => {
 
   useEffect(async () => {
     try {
-      const response = await ItemsService.getItems()
+      const response = await ItemsService.getItems();
       if (response) {
-        setItems(response.data)
+        setItems(response.data);
       }
     } catch (error) {
       throw error;
     }
-  }, [])
+  }, []);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   return (
     <div>
@@ -25,6 +32,7 @@ const AdminDashboard = () => {
           Add new Item
         </Link>
       </div>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
       <table>
         <thead>
           <tr>
@@ -36,24 +44,29 @@ const AdminDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {items ? items.map((item, index) => (
-            <React.Fragment key={index}>
-              <tr>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.address}</td>
-                <td>{item.price}$</td>
-                <td>
-                  <Link to={`/dashboard/new/${item.id}`} className="ui button yellow">
-                    Edit
-                  </Link>
-                  <Link to={`/dashboard/delete/${item.id}`} className="ui button negative">
-                    Delete
-                  </Link>
-                </td>
-              </tr>
-            </React.Fragment>
-          )) : (
+          {items ? (
+            items.map((item, index) => (
+              <React.Fragment key={index}>
+                <tr>
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.address}</td>
+                  <td>{item.price}$</td>
+                  <td>
+                    <Link
+                      to={`/dashboard/new/${item.id}`}
+                      className="ui button yellow"
+                    >
+                      Update
+                    </Link>
+                    <button onClick={openModal} className="ui button negative">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </React.Fragment>
+            ))
+          ) : (
             <tr>
               <td>
                 <div>No items yet!</div>
@@ -67,4 +80,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-
