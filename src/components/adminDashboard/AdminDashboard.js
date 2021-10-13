@@ -54,7 +54,7 @@ const AdminDashboard = () => {
                   <td>{item.price}$</td>
                   <td>
                     <Link
-                      to={`/dashboard/new/${item.id}`}
+                      to={`/update/${item.id}`}
                       className="ui button yellow"
                     >
                       Update

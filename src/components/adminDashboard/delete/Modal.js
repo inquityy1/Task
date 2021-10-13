@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef } from "react";
+
 import "./modal.css";
 
 const Modal = ({ showModal, setShowModal }) => {

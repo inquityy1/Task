@@ -2,30 +2,27 @@ import React, { useRef, useState } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import AuthService from "../../services/auth.service";
-import { required } from "../shared/required";
+import ItemsService from "../../../services/items.service";
+import { required } from "../../shared/required";
 
-import "./login.css";
+import "./updateItem.css";
 
-const Login = (props) => {
+const UpdateItem = () => {
   const form = useRef();
   const checkBtn = useRef();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [price, setPrice] = useState(0);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState(null);
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const updateUser = () => {
+    let item = { name, address, price, userId };
+    console.warn("item", item);
   };
 
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-  };
-
-  const handleLogin = async (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
     setMessage("");
@@ -35,14 +32,16 @@ const Login = (props) => {
 
     if (checkBtn.current.context._errors.length === 0) {
       try {
-        const user = await AuthService.login(username, password);
-        if (user.role === "admin") {
-          props.history.push("/admin_dashboard");
-          window.location.reload();
-        } else {
-          props.history.push("/user_dashboard");
-          window.location.reload();
-        }
+        console.log("Validation passed");
+        const item = {
+          id: Math.floor(Math.random() * 100 + 1),
+          name: name,
+          address,
+          price,
+        };
+        console.log(item, "Item");
+        await ItemsService.addItem(item);
+        window.location.href = "/admin_dashboard";
       } catch (error) {
         const resMessage =
           (error.response &&
@@ -61,36 +60,57 @@ const Login = (props) => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
-        <Form onSubmit={handleLogin} ref={form} className="form">
+        <Form onSubmit={handleSave} ref={form} className="form">
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="name">Name</label>
             <Input
-              name="username"
-              value={username}
+              name="name"
+              value={name}
               className="form-control"
-              onChange={onChangeUsername}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
               validations={[required]}
               type="text"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="address">Address</label>
             <Input
-              name="password"
+              name="address"
+              value={address}
               className="form-control"
-              value={password}
-              onChange={onChangePassword}
+              onChange={(e) => {
+                setAddress(e.target.value);
+              }}
               validations={[required]}
-              type="password"
+              type="text"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="price">Price</label>
+            <Input
+              name="price"
+              className="form-control"
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+              validations={[required]}
+              type="number"
             />
           </div>
 
           <div className="form-group top">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+            <button
+              onClick={updateUser}
+              className="btn btn-primary btn-block"
+              disabled={loading}
+            >
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span>Save</span>
             </button>
           </div>
 
@@ -110,4 +130,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default UpdateItem;
