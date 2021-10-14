@@ -9,8 +9,8 @@ const addItem = (item) => {
   return axios.post(API_URL + "items", item);
 };
 
-const deleteItem = (data) => {
-  return axios.delete(API_URL + "items", data);
+const deleteItem = (id) => {
+  return axios.delete(API_URL + id);
 };
 
 export default {

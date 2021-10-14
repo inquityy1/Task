@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ItemsService from "../../services/items.service";
-import Modal from "./delete/Modal";
+import DeleteModal from "./delete/DeleteModal";
 
 import "./adminDashboard.css";
 
@@ -32,7 +32,11 @@ const AdminDashboard = () => {
           Add new Item
         </Link>
       </div>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <DeleteModal
+        showModal={showModal}
+        hideModal={setShowModal}
+        message={"Are you sure u want to delete this item ?"}
+      />
       <table>
         <thead>
           <tr>

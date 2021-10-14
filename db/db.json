@@ -41,18 +41,6 @@
       "name": "q",
       "address": "w",
       "price": 2
-    },
-    {
-      "id": 92,
-      "name": "a",
-      "address": "s",
-      "price": "2"
-    },
-    {
-      "id": 8,
-      "name": "ja",
-      "address": "vrbovac",
-      "price": 23213
     }
   ]
 }

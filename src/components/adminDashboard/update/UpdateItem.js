@@ -15,12 +15,6 @@ const UpdateItem = () => {
   const [price, setPrice] = useState(0);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState(null);
-
-  const updateUser = () => {
-    let item = { name, address, price, userId };
-    console.warn("item", item);
-  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -102,11 +96,7 @@ const UpdateItem = () => {
           </div>
 
           <div className="form-group top">
-            <button
-              onClick={updateUser}
-              className="btn btn-primary btn-block"
-              disabled={loading}
-            >
+            <button className="btn btn-primary btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
