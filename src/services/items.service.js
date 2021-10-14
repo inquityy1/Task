@@ -18,17 +18,3 @@ export default {
   addItem,
   deleteItem,
 };
-// const handleRemove = (e) => {
-//   const id = "/98";
-//   const url = "http://localhost:3000/items";
-
-//   e.preventDefault();
-//   axios
-//     .delete(url + id)
-//     .then((res) => {
-//       console.log(res.data, "uspelo");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };

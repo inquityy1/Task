@@ -4,10 +4,11 @@ import AuthService from "../../services/auth.service";
 
 const AdminRoute = ({ component: Component, handleChildFuncs, ...rest }) => {
   const user = AuthService.getCurrentUser();
+
   return (
     <Route
       {...rest}
-      render={(props) =>
+      render={() =>
         user !== undefined && user.role === "admin" ? (
           <Component />
         ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ItemsService from "../../services/items.service";
 import DeleteModal from "./delete/DeleteModal";
@@ -7,6 +7,7 @@ import "./adminDashboard.css";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState(undefined);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(async () => {
     try {
@@ -19,17 +20,15 @@ const AdminDashboard = () => {
     }
   }, []);
 
-  const handleRemove = (e) => {
-    ItemsService.deleteItem("90")
-      .then((res) => {
-        console.log(res.data, "uspelo");
+  const handleRemove = (id) => {
+    ItemsService.deleteItem()
+      .then(() => {
+        window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(id);
       });
   };
-
-  const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
     setShowModal((prev) => !prev);
