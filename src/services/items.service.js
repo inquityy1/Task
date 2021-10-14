@@ -10,7 +10,7 @@ const addItem = (item) => {
 };
 
 const deleteItem = (id) => {
-  return axios.delete(API_URL + id);
+  return axios.delete(API_URL + "items/" + id);
 };
 
 export default {
@@ -18,3 +18,17 @@ export default {
   addItem,
   deleteItem,
 };
+// const handleRemove = (e) => {
+//   const id = "/98";
+//   const url = "http://localhost:3000/items";
+
+//   e.preventDefault();
+//   axios
+//     .delete(url + id)
+//     .then((res) => {
+//       console.log(res.data, "uspelo");
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };

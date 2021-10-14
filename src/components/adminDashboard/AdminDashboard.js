@@ -19,6 +19,16 @@ const AdminDashboard = () => {
     }
   }, []);
 
+  const handleRemove = (e) => {
+    ItemsService.deleteItem("90")
+      .then((res) => {
+        console.log(res.data, "uspelo");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -36,6 +46,7 @@ const AdminDashboard = () => {
         showModal={showModal}
         hideModal={setShowModal}
         message={"Are you sure u want to delete this item ?"}
+        confirmModal={handleRemove}
       />
       <table>
         <thead>

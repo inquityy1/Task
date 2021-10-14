@@ -3,14 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 import "./modal.css";
 
-const DeleteModal = ({
-  showModal,
-  hideModal,
-  confirmModal,
-  id,
-  type,
-  message,
-}) => {
+const DeleteModal = ({ showModal, hideModal, confirmModal, message }) => {
   return (
     <Modal show={showModal} onHide={hideModal}>
       <Modal.Header closeButton>
@@ -20,7 +13,7 @@ const DeleteModal = ({
         <div className="alert alert-danger">{message}</div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={() => confirmModal(type, id)}>
+        <Button variant="danger" onClick={confirmModal}>
           Yes
         </Button>
         <Button variant="default" onClick={hideModal}>

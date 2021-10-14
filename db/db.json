@@ -13,24 +13,6 @@
   ],
   "items": [
     {
-      "id": 12,
-      "name": "Mouse",
-      "address": "Vrbovac",
-      "price": 12
-    },
-    {
-      "id": 98,
-      "name": "Crown",
-      "address": "USA",
-      "price": 2000
-    },
-    {
-      "id": 34,
-      "name": "Debeli",
-      "address": "Butchery",
-      "price": 13
-    },
-    {
       "id": 27,
       "name": "soul",
       "address": "my home",
