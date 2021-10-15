@@ -20,8 +20,8 @@ const AdminDashboard = () => {
     }
   }, []);
 
-  const handleRemove = () => {
-    ItemsService.deleteItem()
+  const handleRemove = (id) => {
+    ItemsService.deleteItem(id)
       .then(() => {
         window.location.reload();
       })
